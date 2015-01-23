@@ -11,20 +11,20 @@
 
 ## Write a short comment describing this function
 
-  ## makeCacheMatrix sets a special matrix with a function to  
-  ## set the value and output the matrix through 'get'. 
-  ## It also set's the inverse (setinverse) and outputs (getinverse) it.
+  ## makeCacheMatrix sets a special matrix returning a list.  
+  ## The function sets the value and outputs the matrix through 'get'. 
+  ## It also sets the inverse (setinverse) and outputs (getinverse) it.
   ## The function uses the special operator <<- , which sets the value of
   ## inverse 'inv' in a different environment than the current one. 
 
  makeCacheMatrix <- function(x = matrix()) {
    
-      inv <- NULL
+      inv <- NULL   ## Inverse 'inv' is initially set to NULL
   
       set <- function(y = matrix()) {
             x <<- y
-              inv <<- NULL
-        }
+              inv <<- NULL ## Inverse 'inv' is set to NULL 
+        }                  ## when a new matrix is set
     
       get <- function()x
       setinverse <- function(solve) inv <<- solve(x)
@@ -40,7 +40,7 @@
 ## Write a short comment describing this function
 
   ## The function computes the inverse of the special matrix set above
-  ## using solve and caches it. However, it checks if the inverse has already
+  ## using solve and caches it. It checks if the inverse has already
   ## been calculated and if yes, it retrieves it from the cache and displays
   ## "getting cached data".
 
@@ -49,12 +49,13 @@
   
       inv <- x$getinverse()
       if(!is.null(inv)) {
-          message("getting cached data")
+          message("getting cached data")  ## If the inverse is not NULL  
+                                          ## it will return the cached inverse
           return(inv)
         }
   
       data <- x$get()
-      inv    <- solve(data)
+      inv    <- solve(data)             ## Else inverse is computed
       x$setinverse(inv)
       inv
  }
